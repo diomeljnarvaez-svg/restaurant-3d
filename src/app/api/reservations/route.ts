@@ -1,0 +1,37 @@
+import { NextResponse } from "next/server";
+import { getAll, create } from "@/lib/db";
+import type { Reservation } from "@/lib/types";
+
+export async function GET() {
+  const reservations = getAll<Reservation>("reservations");
+  return NextResponse.json(reservations.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+}
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    const { name, email, phone, date, time, guests, notes } = body;
+
+    if (!name || !email || !phone || !date || !time || !guests) {
+      return NextResponse.json({ error: "Todos los campos son requeridos" }, { status: 400 });
+    }
+
+    const reservation: Reservation = {
+      id: Date.now().toString(),
+      name,
+      email,
+      phone,
+      date,
+      time,
+      guests: Number(guests),
+      notes: notes || "",
+      status: "pending",
+      createdAt: new Date().toISOString(),
+    };
+
+    const created = create("reservations", reservation);
+    return NextResponse.json(created, { status: 201 });
+  } catch {
+    return NextResponse.json({ error: "Error al crear reservación" }, { status: 500 });
+  }
+}

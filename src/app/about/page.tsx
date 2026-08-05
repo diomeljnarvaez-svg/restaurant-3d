@@ -1,0 +1,71 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import { useTranslations } from "@/lib/i18n";
+import type { SiteSettings } from "@/lib/types";
+import { defaultSettings } from "@/lib/types";
+
+export default function AboutPage() {
+  const { t } = useTranslations();
+  const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
+  }, []);
+
+  if (!mounted) return null;
+  const { primaryColor, pageBg, cardBg, textPrimary, textSecondary, footerBg } = settings;
+
+  return (
+    <div style={{ backgroundColor: pageBg, color: textPrimary, minHeight: "100vh" }}>
+      <Header siteName={settings.siteName} primaryColor={primaryColor} />
+      <div className="pt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
+            <div>
+              <p className="text-sm font-medium tracking-widest uppercase mb-4" style={{ color: primaryColor }}>{t("about.label")}</p>
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: textPrimary }}>{settings.aboutTitle}</h1>
+              <p className="leading-relaxed text-lg" style={{ color: textSecondary }}>{settings.aboutContent}</p>
+            </div>
+            <div className="rounded-2xl overflow-hidden border" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Restaurante" className="w-full h-[400px] object-cover" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+            {[
+              { title: t("about.mission"), desc: t("about.missionDesc") },
+              { title: t("about.vision"), desc: t("about.visionDesc") },
+              { title: t("about.values"), desc: t("about.valuesDesc") },
+            ].map((item, i) => (
+              <div key={i} className="p-8 rounded-2xl border" style={{ backgroundColor: cardBg, borderColor: "rgba(255,255,255,0.1)" }}>
+                <h3 className="text-xl font-bold mb-4" style={{ color: textPrimary }}>{item.title}</h3>
+                <p className="leading-relaxed" style={{ color: textSecondary }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <Footer
+        siteName={settings.siteName}
+        primaryColor={primaryColor}
+        footerBg={footerBg}
+        textPrimary={textPrimary}
+        textSecondary={textSecondary}
+        address={settings.address}
+        phone={settings.phone}
+        email={settings.email}
+        businessHours={settings.businessHours}
+        facebook={settings.facebook}
+        instagram={settings.instagram}
+        twitter={settings.twitter}
+      />
+      <WhatsAppButton number={settings.whatsappNumber} message={settings.whatsappMessage} primaryColor={primaryColor} />
+    </div>
+  );
+}

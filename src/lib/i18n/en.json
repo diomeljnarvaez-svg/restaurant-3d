@@ -1,0 +1,213 @@
+{
+  "siteName": "Savory",
+  "siteDescription": "Unique dining experience",
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "reservar": "Reserve",
+    "about": "About",
+    "contact": "Contact",
+    "admin": "Admin",
+    "login": "Sign In",
+    "logout": "Sign Out"
+  },
+  "hero": {
+    "badge": "Now Booking",
+    "heroTitle": "An Unforgettable Dining Experience",
+    "heroSubtitle": "Flavors that tell stories, ingredients that inspire",
+    "viewMenu": "View Menu",
+    "bookTable": "Book a Table"
+  },
+  "featuredMenu": {
+    "label": "Discover",
+    "title": "Featured Dishes",
+    "subtitle": "A selection of our most popular dishes",
+    "viewFull": "View Full Menu"
+  },
+  "aboutPreview": {
+    "label": "Our Story",
+    "title": "Our Story",
+    "cta": "Learn more",
+    "years": "Years"
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "title": "What Our Customers Say",
+    "items": [
+      { "name": "Maria Garcia", "text": "The best dining experience in the city. The mushroom risotto is simply spectacular.", "role": "Regular customer" },
+      { "name": "Carlos Lopez", "text": "Amazing atmosphere, impeccable service. We'll be back every month.", "role": "Regular customer" },
+      { "name": "Ana Martinez", "text": "The desserts are a work of art. The tiramisu transported me to Italy.", "role": "Regular customer" }
+    ]
+  },
+  "cta": {
+    "title": "Ready for a Unique Experience?",
+    "subtitle": "Book your table today and discover flavors that will surprise you.",
+    "bookNow": "Book Now",
+    "exploreMenu": "Explore Menu"
+  },
+  "menu": {
+    "label": "Our Menu",
+    "title": "Discover Our Dishes",
+    "subtitle": "A selection of dishes prepared with the finest ingredients",
+    "all": "All",
+    "orderBy": "Order via WhatsApp",
+    "order": "Order",
+    "orderMsg": "Hi, I'd like to order: {name}",
+    "backToMenu": "Back to menu",
+    "noProducts": "No products in this category.",
+    "productNotFound": "Product not found",
+    "share": "Share this dish",
+    "qrLabel": "Digital Menu",
+    "scan": "Scan to view the menu on your phone"
+  },
+  "categories": {
+    "Todas": "All",
+    "Bebidas Calientes": "Hot Drinks",
+    "Bebidas Frías": "Cold Drinks",
+    "Desayunos": "Breakfast",
+    "Especialidades en Desayunos": "Breakfast Specialties",
+    "Adicionales": "Sides & Add-ons",
+    "Casados": "Casados (Combo Plates)",
+    "Almuerzo o Cena": "Lunch or Dinner",
+    "Ensaladas": "Salads",
+    "Sopas": "Soups",
+    "Opciones para la Tarde": "Afternoon Options",
+    "Antojos": "Snacks & Appetizers",
+    "Burritos": "Burritos",
+    "Hamburguesas": "Burgers",
+    "Sándwiches": "Sandwiches"
+  },
+  "dietary": {
+    "vegan": "Vegan",
+    "vegetarian": "Vegetarian",
+    "glutenFree": "Gluten-Free",
+    "lactoseFree": "Lactose-Free",
+    "spicy": "Spicy",
+    "organic": "Organic"
+  },
+  "about": {
+    "label": "About Us",
+    "title": "Our Story",
+    "mission": "Mission",
+    "missionDesc": "To offer an exceptional dining experience combining fresh ingredients with innovative culinary techniques.",
+    "vision": "Vision",
+    "visionDesc": "To be recognized as the reference restaurant in the city, standing out for our quality and service.",
+    "values": "Values",
+    "valuesDesc": "Passion for cooking, commitment to quality, respect for ingredients, and dedication to customers."
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Contact Us",
+    "subtitle": "We are here to help you",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Hours",
+    "whatsapp": "Message us on WhatsApp",
+    "whatsappDirect": "Or message us directly on WhatsApp"
+  },
+  "reservations": {
+    "label": "Reservations",
+    "title": "Book a Table",
+    "subtitle": "Request your reservation at least 2 hours in advance.",
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone / WhatsApp",
+    "date": "Date",
+    "time": "Time",
+    "guests": "Guests",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Allergies, special occasion, table preferences...",
+    "submit": "Request Reservation",
+    "sending": "Sending...",
+    "successTitle": "Reservation Requested!",
+    "successMsg": "We have received your reservation request.",
+    "successSub": "We will confirm via WhatsApp or email shortly.",
+    "backHome": "Back to Home",
+    "disabledTitle": "Reservations not available",
+    "disabledMsg": "Online reservations are disabled. Please contact us directly.",
+    "confirmMsg": "We will confirm availability via WhatsApp or email.",
+    "person": "person",
+    "persons": "people",
+    "error": "Error creating reservation",
+    "namePlaceholder": "Your name"
+  },
+  "footer": {
+    "description": "Unique dining experience where every dish tells a story.",
+    "hours": "Hours",
+    "contact": "Contact",
+    "follow": "Follow Us",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "msg": "The page you are looking for does not exist.",
+    "back": "Go back home"
+  },
+  "offline": {
+    "title": "You're offline",
+    "msg": "It looks like you don't have internet access. Reconnect to keep browsing.",
+    "retry": "Try again"
+  },
+  "login": {
+    "title": "Sign In",
+    "subtitle": "Admin panel",
+    "password": "Password",
+    "button": "Sign In",
+    "invalid": "Invalid credentials",
+    "back": "Back to site",
+    "demo": "Demo: admin@restaurant.com / admin123"
+  },
+  "push": {
+    "on": "Notifications enabled",
+    "off": "Enable notifications"
+  },
+  "pwa": {
+    "title": "Install Savory",
+    "desc": "Add this app to your home screen",
+    "install": "Install",
+    "later": "Not now"
+  },
+  "instagram": {
+    "follow": "Follow us on Instagram to see our daily creations",
+    "button": "Follow on Instagram",
+    "caption1": "The perfect breakfast to start the day ☀️",
+    "caption2": "Our new seasonal pizza 🍕",
+    "caption3": "Fresh pasta Tuesday 🍝",
+    "caption4": "Desserts to fall in love with 💜",
+    "caption5": "Life is too short for just one dish 🍝",
+    "caption6": "Dinner with friends = the best moments ✨"
+  },
+  "chatbot": {
+    "placeholder": "Type your question...",
+    "assistant": "Virtual Assistant",
+    "greeting1": "Hi! I'm Savy, Savory's virtual assistant 🎉",
+    "greeting2": "How can I help you today?",
+    "greeting3": "You can ask me about hours, the menu, reservations and more.",
+    "faq_hours_q": "hours, open, close, time",
+    "faq_hours_a": "We're open Mon-Sun from 12:00 to 23:00.",
+    "faq_location_q": "address, location, where, map",
+    "faq_location_a": "We are located at Av. Principal 123, Ciudad.",
+    "faq_menu_q": "menu, food, dish, eat",
+    "faq_menu_a": "We have a wide variety of dishes. Would you like to see something specific? You can view our full menu at /menu.",
+    "faq_reservar_q": "reserve, table, booking, availability",
+    "faq_reservar_a": "Sure! You can make a reservation from our /reservar page or write to us directly on WhatsApp.",
+    "faq_recomendar_q": "recommend, recommendation, suggest, favorite, featured",
+    "faq_recomendar_a": "Our most popular dishes are the Pinto Deluxe, Cordón Bleu and the Taco a Taco Burger. All are a must-try!",
+    "faq_precio_q": "price, cost, expensive, cheap, how much",
+    "faq_precio_a": "Our prices vary by dish. You can see them all in our digital menu at /menu.",
+    "faq_contacto_q": "whatsapp, contact, phone, call",
+    "faq_contacto_a": "You can reach us at 2560-6590 or write to us on WhatsApp using the green button on the screen.",
+    "faq_pago_q": "payment, card, cash, transfer",
+    "faq_pago_a": "We accept cash, credit/debit cards and transfers.",
+    "faq_veggie_q": "vegetarian, vegan, veggie, gluten free, allergy, allergic",
+    "faq_veggie_a": "We have vegetarian and vegan options. We can also adapt dishes for allergies. Ask us when making your reservation.",
+    "faq_ninos_q": "children, kid, kids, kids menu, family",
+    "faq_ninos_a": "Children are welcome! We have a kids menu and family areas.",
+    "faq_evento_q": "event, party, birthday, private, group",
+    "faq_evento_a": "We host private events and celebrations. Contact us for more information.",
+    "faq_wifi_q": "wifi, internet",
+    "faq_wifi_a": "We offer free WiFi for all our customers.",
+    "fallback": "I didn't understand your question. You can ask me about hours, the menu, reservations, or contact us on WhatsApp for more details."
+  }
+}
