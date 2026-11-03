@@ -106,6 +106,22 @@ npm start
 
 > Cambiá estas credenciales antes de usar el sitio en producción.
 
+### Permisos por rol
+
+Las rutas de escritura de la API verifican la sesión (NextAuth) y el rol. Sin sesión devuelven **401**; con un rol insuficiente, **403**.
+
+| Acción | superadmin | admin | editor | user |
+|---|:---:|:---:|:---:|:---:|
+| Ver menú y configuración (público) | ✅ | ✅ | ✅ | ✅ |
+| Crear reservación (público) | ✅ | ✅ | ✅ | ✅ |
+| Crear / editar / borrar productos | ✅ | ✅ | ✅ | ❌ |
+| Ver y gestionar reservaciones | ✅ | ✅ | ✅ | ❌ |
+| Editar configuración del sitio | ✅ | ✅ | ❌ | ❌ |
+| Programa de fidelidad | ✅ | ✅ | ❌ | ❌ |
+| Gestionar usuarios | ✅ | ❌ | ❌ | ❌ |
+
+El registro público (`POST /api/auth/register`) siempre crea usuarios con rol `user`; solo un superadmin autenticado puede asignar otro rol.
+
 ---
 
 ## 🗂️ Estructura
@@ -124,6 +140,7 @@ src/
 ├── lib/
 │   ├── db.ts                 # Capa de datos (Neon / JSON)
 │   ├── auth.ts               # Configuración NextAuth
+│   ├── api-auth.ts           # Guard de sesión y permisos por rol
 │   ├── types.ts              # Tipos y settings por defecto
 │   ├── dietary.ts            # Badges dietéticos
 │   └── i18n/                 # Traducciones ES/EN
