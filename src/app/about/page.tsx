@@ -29,9 +29,20 @@ export default function AboutPage() {
       <div style={{ backgroundColor: pageBg, color: textPrimary, minHeight: "100vh" }}>
         <Header siteName={settings.siteName || "Donde Papá Restaurant"} primaryColor={primaryColor} />
         <div className="min-h-screen flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4">
-            <CostaRicaFlag width={80} height={48} />
-            <p style={{ color: textSecondary }}>Cargando...</p>
+          <div className="app-splash-inner">
+            <div className="app-splash-flag-wrap">
+              <svg className="app-splash-flag" viewBox="0 0 300 180" role="img" aria-label="Bandera de Costa Rica">
+                <rect width="300" height="180" fill="#002B7F" />
+                <rect y="30" width="300" height="120" fill="#FFFFFF" />
+                <rect y="60" width="300" height="60" fill="#CE1126" />
+                <rect className="app-splash-shine" x="-120" y="0" width="80" height="180" fill="rgba(255,255,255,0.45)" transform="skewX(-20)" />
+              </svg>
+            </div>
+            <p className="app-splash-name">{settings.siteName || "Donde Papá Restaurant"}</p>
+            <p className="app-splash-sub">Cargando experiencia...</p>
+            <div className="app-splash-bar">
+              <span />
+            </div>
           </div>
         </div>
       </div>
