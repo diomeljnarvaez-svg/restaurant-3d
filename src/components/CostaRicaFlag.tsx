@@ -12,8 +12,8 @@ export default function CostaRicaFlag({ width = 20, height = 12, className = "" 
       width={width}
       height={height}
       viewBox="0 0 5 3"
-      aria-label="Costa Rica"
-      role="img"
+      aria-hidden="true"
+      role="presentation"
       className={className}
       style={{ display: "inline-block", verticalAlign: "middle" }}
     >
