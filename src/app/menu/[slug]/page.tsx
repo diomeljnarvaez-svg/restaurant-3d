@@ -9,6 +9,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import QRCodeDisplay from "@/components/QRCodeDisplay";
 import ImageLightbox from "@/components/ImageLightbox";
 import ProductImage from "@/components/ProductImage";
+import CostaRicaFlag from "@/components/CostaRicaFlag";
 import { detectDietaryBadges } from "@/lib/dietary";
 import { formatPrice } from "@/lib/format";
 import { useTranslations } from "@/lib/i18n";
@@ -72,7 +73,10 @@ export default function MenuDetailPage() {
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap mb-2">
-                <p className="text-sm font-medium tracking-widest uppercase" style={{ color: primaryColor }}>{tc(product.category)}</p>
+                <p className="text-sm font-medium tracking-widest uppercase flex items-center gap-2" style={{ color: primaryColor }}>
+                  {product.category === "Platos Típicos" && <CostaRicaFlag width={20} height={12} />}
+                  {tc(product.category)}
+                </p>
                 {detectDietaryBadges(product.name, product.description).map(badge => (
                   <span key={badge.label} className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: badge.color + "22", color: badge.color }}>
                     {t(`dietary.${badge.label}`)}

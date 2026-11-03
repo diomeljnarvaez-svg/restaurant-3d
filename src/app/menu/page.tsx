@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import QRCodeDisplay from "@/components/QRCodeDisplay";
 import ProductImage from "@/components/ProductImage";
+import CostaRicaFlag from "@/components/CostaRicaFlag";
 import { detectDietaryBadges } from "@/lib/dietary";
 import { formatPrice } from "@/lib/format";
 import { useTranslations } from "@/lib/i18n";
@@ -41,6 +42,7 @@ export default function MenuPage() {
             <p className="text-sm font-medium tracking-widest uppercase mb-4" style={{ color: primaryColor }}>{t("menu.label")}</p>
             <h1 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: textPrimary }}>{t("menu.title")}</h1>
             <p className="max-w-xl mx-auto" style={{ color: textSecondary }}>{t("menu.subtitle")}</p>
+            <p className="max-w-xl mx-auto text-xs mt-3" style={{ color: textSecondary }}>{t("menu.taxNote")}</p>
           </div>
 
           <div className="flex flex-wrap gap-3 justify-center mb-12">
@@ -51,6 +53,7 @@ export default function MenuPage() {
                 className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all`}
                 style={category === cat ? { backgroundColor: primaryColor, color: "#fff" } : { color: textSecondary, backgroundColor: "transparent", border: `1px solid rgba(255,255,255,0.1)` }}
               >
+                {cat === "Platos Típicos" && <CostaRicaFlag width={18} height={11} className="mr-1.5" />}
                 {tc(cat)}
               </button>
             ))}
@@ -68,7 +71,10 @@ export default function MenuPage() {
                 </Link>
                 <div className="p-6">
                   <div className="flex items-center gap-2 flex-wrap mb-2">
-                    <p className="text-xs font-medium tracking-widest uppercase" style={{ color: primaryColor }}>{tc(product.category)}</p>
+                    <p className="text-xs font-medium tracking-widest uppercase flex items-center gap-1.5" style={{ color: primaryColor }}>
+                      {product.category === "Platos Típicos" && <CostaRicaFlag width={16} height={10} />}
+                      {tc(product.category)}
+                    </p>
                     {detectDietaryBadges(product.name, product.description).map(badge => (
                       <span key={badge.label} className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ backgroundColor: badge.color + "22", color: badge.color }}>
                         {t(`dietary.${badge.label}`)}
