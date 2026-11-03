@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
 import QRCodeDisplay from "@/components/QRCodeDisplay";
@@ -34,9 +35,11 @@ const colorAreas = [
 ] as const;
 
 export default function AdminSettings() {
+  const router = useRouter();
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
@@ -44,14 +47,22 @@ export default function AdminSettings() {
 
   const handleSave = async () => {
     setSaving(true);
-    await fetch("/api/settings", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(settings),
-    });
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    setError("");
+    try {
+      const res = await fetch("/api/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(settings),
+      });
+      if (!res.ok) throw new Error("save failed");
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+      router.refresh();
+    } catch {
+      setError("No se pudo guardar la configuración. Intentá de nuevo.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const update = (key: keyof SiteSettings, value: any) => {
@@ -71,6 +82,10 @@ export default function AdminSettings() {
           {saving ? "Guardando..." : saved ? "✓ Guardado" : "Guardar Cambios"}
         </button>
       </div>
+
+      {error && (
+        <p className="mb-4 text-sm text-red-400" role="alert">{error}</p>
+      )}
 
       <div className="space-y-8">
         {/* Site Identity */}
