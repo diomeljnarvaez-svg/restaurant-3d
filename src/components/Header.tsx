@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useTranslations } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import PushSubscribe from "@/components/PushSubscribe";
 import type { UserRole } from "@/lib/types";
 
 interface Props {
@@ -59,7 +58,6 @@ export default function Header({ siteName, primaryColor }: Props) {
               <Link href="/admin" className="text-sm text-gray-300 hover:text-white transition-colors">{t("nav.admin")}</Link>
             )}
             <LanguageSwitcher />
-            <PushSubscribe />
             {session ? (
               <button onClick={() => signOut()} className="text-sm text-gray-400 hover:text-white transition-colors">{t("nav.logout")}</button>
             ) : (
@@ -69,7 +67,6 @@ export default function Header({ siteName, primaryColor }: Props) {
 
           <div className="flex items-center gap-2 md:hidden">
             <LanguageSwitcher />
-            <PushSubscribe />
             <button onClick={() => setMenuOpen(!menuOpen)} className="text-white p-2" aria-label={t("nav.menu")}>
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {menuOpen ? (
