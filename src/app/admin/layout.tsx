@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import type { SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
@@ -12,6 +12,7 @@ const allowedRoles = ["superadmin", "admin", "editor"];
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [mounted, setMounted] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -43,6 +44,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const user = session?.user as any;
   if (!allowedRoles.includes(user?.role)) {
     router.push("/");
+    return null;
+  }
+
+  const isAdmin = user?.role === "admin" || user?.role === "superadmin";
+  if (!isAdmin && (pathname.startsWith("/admin/settings") || pathname.startsWith("/admin/loyalty"))) {
+    router.push("/admin");
+    return null;
+  }
+  if (pathname.startsWith("/admin/users") && user?.role !== "superadmin") {
+    router.push("/admin");
     return null;
   }
 

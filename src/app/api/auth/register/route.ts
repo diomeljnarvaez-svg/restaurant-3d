@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { getAll, create } from "@/lib/db";
+import { auth } from "@/lib/auth";
+import { isValidRole } from "@/lib/api-auth";
 import bcrypt from "bcryptjs";
-import type { User } from "@/lib/types";
+import type { User, UserRole } from "@/lib/types";
 
 export async function POST(req: Request) {
   try {
@@ -17,13 +19,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "El email ya está registrado" }, { status: 400 });
     }
 
-    const validRoles = ["superadmin", "admin", "editor", "user"];
+    // Solo un superadmin autenticado puede asignar roles distintos de "user".
+    // Un visitante anónimo (registro público) siempre queda como "user".
+    const session = await auth();
+    const callerRole = (session?.user as { role?: UserRole } | undefined)?.role;
+    const requestedRole: UserRole = isValidRole(role) ? role : "user";
+    const assignedRole: UserRole = callerRole === "superadmin" ? requestedRole : "user";
+
     const newUser: User = {
       id: Date.now().toString(),
       name,
       email,
       password: await bcrypt.hash(password, 10),
-      role: validRoles.includes(role) ? role : "user",
+      role: assignedRole,
       createdAt: new Date().toISOString(),
     };
 

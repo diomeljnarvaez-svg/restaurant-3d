@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAll, create } from "@/lib/db";
+import { guard, STAFF_ROLES } from "@/lib/api-auth";
 import type { Product } from "@/lib/types";
 
 export async function GET() {
@@ -8,6 +9,9 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const auth = await guard(STAFF_ROLES);
+  if (!auth.ok) return auth.response;
+
   try {
     const body = await req.json();
     const newProduct: Product = {

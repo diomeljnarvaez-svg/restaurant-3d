@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 import { getAll, create } from "@/lib/db";
+import { guard, STAFF_ROLES } from "@/lib/api-auth";
 import type { Reservation } from "@/lib/types";
 
 export async function GET() {
+  const auth = await guard(STAFF_ROLES);
+  if (!auth.ok) return auth.response;
+
   const reservations = await getAll<Reservation>("reservations");
   return NextResponse.json(reservations.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
 }

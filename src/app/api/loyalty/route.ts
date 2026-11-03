@@ -1,15 +1,22 @@
 import { NextResponse } from "next/server";
 import { readData, writeData } from "@/lib/db";
+import { guard, ADMIN_ROLES } from "@/lib/api-auth";
 import type { LoyaltyEntry } from "@/lib/types";
 
 const FILE = "loyalty";
 
 export async function GET() {
+  const auth = await guard(ADMIN_ROLES);
+  if (!auth.ok) return auth.response;
+
   const data = (await readData<LoyaltyEntry>(FILE)) || [];
   return NextResponse.json(data);
 }
 
 export async function PUT(req: Request) {
+  const auth = await guard(ADMIN_ROLES);
+  if (!auth.ok) return auth.response;
+
   try {
     const body = await req.json();
     const data = (await readData<LoyaltyEntry>(FILE)) || [];
@@ -27,6 +34,9 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
+  const auth = await guard(ADMIN_ROLES);
+  if (!auth.ok) return auth.response;
+
   try {
     const { email } = await req.json();
     let data = (await readData<LoyaltyEntry>(FILE)) || [];
