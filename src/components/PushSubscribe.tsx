@@ -16,7 +16,7 @@ export default function PushSubscribe() {
       const reg = await navigator.serviceWorker.ready;
       const sub = await reg.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array("BEl62iUYgUvd8XqBUJmS4GpQfGQwYQYFTPJlYQoYQYFTPJlYQoYQYFTPJlYQoYQYFTPJlYQoYQYFTPJlYQoYQY"),
+        applicationServerKey: urlBase64ToUint8Array("BC2hcB3v7SHNZo9uRwtgX8SjCvYCqu_firvoUG2RThKuYmd800jez4Dh3qSBDTgdmZH-18o6HhSOCQda0SNriGk"),
       });
       await fetch("/api/push/subscribe", {
         method: "POST",
