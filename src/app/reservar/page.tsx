@@ -15,7 +15,7 @@ export default function ReservarPage() {
   const router = useRouter();
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const mounted = useMounted();
-  const [form, setForm] = useState({ name: "", email: "", phone: "", date: "", time: "", guests: "2", notes: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "+", date: "", time: "", guests: "2", notes: "" });
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
@@ -109,7 +109,12 @@ export default function ReservarPage() {
 
             <div>
               <label className="block text-sm font-medium mb-1.5" style={{ color: textSecondary }}>{t("reservations.phone")}</label>
-              <input type="tel" required value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className="w-full px-4 py-3 rounded-xl border outline-none focus:ring-2" style={{ backgroundColor: pageBg, borderColor: "rgba(255,255,255,0.1)", color: textPrimary }} placeholder="+1 234 567 890" />
+              <input type="tel" required value={form.phone} onChange={e => {
+                let v = e.target.value;
+                if (!v.startsWith("+")) v = "+" + v.replace(/^\+*/, "");
+                if (v === "") v = "+";
+                setForm({ ...form, phone: v });
+              }} className="w-full px-4 py-3 rounded-xl border outline-none focus:ring-2" style={{ backgroundColor: pageBg, borderColor: "rgba(255,255,255,0.1)", color: textPrimary }} placeholder="+" />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

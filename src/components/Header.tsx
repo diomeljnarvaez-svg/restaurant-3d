@@ -41,9 +41,9 @@ export default function Header({ siteName, primaryColor }: Props) {
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Link href="/" className="flex items-center gap-2">
             {logo && (
-              <Image src={logo} alt={siteName} width={180} height={40} unoptimized className="h-10 w-auto max-w-[120px] object-contain" />
+              <Image src={logo} alt={siteName} width={220} height={56} unoptimized className="h-12 sm:h-14 w-auto max-w-[180px] object-contain drop-shadow-lg" />
             )}
-            <span className="text-lg sm:text-2xl font-bold tracking-tight leading-tight" style={{ color: primaryColor }}>
+            <span className="text-xl sm:text-3xl font-extrabold tracking-tight leading-tight drop-shadow" style={{ color: primaryColor }}>
               {siteName}
             </span>
           </Link>
