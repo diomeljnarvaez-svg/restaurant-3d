@@ -74,7 +74,7 @@ export interface SiteSettings {
 }
 
 export const defaultSettings: SiteSettings = {
-  siteName: "Donde Papá",
+  siteName: "Donde Papá Restaurant",
   siteDescription: "Experiencia gastronómica única",
   logo: "",
   primaryColor: "#8B5CF6",

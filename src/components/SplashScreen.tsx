@@ -54,7 +54,7 @@ export default function SplashScreen() {
             />
           </svg>
         </div>
-        <p className="app-splash-name">Donde Papá</p>
+        <p className="app-splash-name">Donde Papá Restaurant</p>
         <p className="app-splash-sub">Cargando experiencia...</p>
         <div className="app-splash-bar">
           <span />

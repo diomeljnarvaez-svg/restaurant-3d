@@ -1,5 +1,5 @@
 {
-  "siteName": "Donde Papá",
+  "siteName": "Donde Papá Restaurant",
   "siteDescription": "Experiencia gastronómica única",
   "nav": {
     "home": "Inicio",
@@ -162,7 +162,7 @@
     "off": "Activar notificaciones"
   },
   "pwa": {
-    "title": "Instala Donde Papá",
+    "title": "Instala Donde Papá Restaurant",
     "desc": "Agrega esta app a tu pantalla de inicio",
     "install": "Instalar",
     "later": "Ahora no"
@@ -180,7 +180,7 @@
   "chatbot": {
     "placeholder": "Escribe tu pregunta...",
     "assistant": "Asistente Virtual",
-    "greeting1": "¡Hola! Soy el asistente virtual de Donde Papá 🎉",
+    "greeting1": "¡Hola! Soy el asistente virtual de Donde Papá Restaurant 🎉",
     "greeting2": "¿En qué puedo ayudarte hoy?",
     "greeting3": "Puedes preguntarme sobre horarios, menú, reservaciones y más.",
     "faq_hours_q": "horario, abren, cierran, hora",

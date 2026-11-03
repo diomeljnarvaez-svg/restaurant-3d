@@ -43,7 +43,7 @@ export default function Header({ siteName, primaryColor }: Props) {
             {logo ? (
               <Image src={logo} alt={siteName} width={180} height={40} unoptimized className="h-10 w-auto max-w-[180px] object-contain" />
             ) : (
-              <span className="text-2xl font-bold tracking-tight" style={{ color: primaryColor }}>
+              <span className="text-lg sm:text-2xl font-bold tracking-tight leading-tight" style={{ color: primaryColor }}>
                 {siteName}
               </span>
             )}

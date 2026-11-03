@@ -102,7 +102,7 @@ export default function ChatBot() {
               S
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">Donde Papá</p>
+              <p className="text-sm font-semibold text-white">Donde Papá Restaurant</p>
               <p className="text-xs text-gray-400">{t("chatbot.assistant")}</p>
             </div>
           </div>

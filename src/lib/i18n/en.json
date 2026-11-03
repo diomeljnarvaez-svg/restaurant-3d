@@ -1,5 +1,5 @@
 {
-  "siteName": "Donde Papá",
+  "siteName": "Donde Papá Restaurant",
   "siteDescription": "Unique dining experience",
   "nav": {
     "home": "Home",
@@ -163,7 +163,7 @@
     "off": "Enable notifications"
   },
   "pwa": {
-    "title": "Install Donde Papá",
+    "title": "Install Donde Papá Restaurant",
     "desc": "Add this app to your home screen",
     "install": "Install",
     "later": "Not now"
@@ -181,7 +181,7 @@
   "chatbot": {
     "placeholder": "Type your question...",
     "assistant": "Virtual Assistant",
-    "greeting1": "Hi! I'm the virtual assistant for Donde Papá 🎉",
+    "greeting1": "Hi! I'm the virtual assistant for Donde Papá Restaurant 🎉",
     "greeting2": "How can I help you today?",
     "greeting3": "You can ask me about hours, the menu, reservations and more.",
     "faq_hours_q": "hours, open, close, time",

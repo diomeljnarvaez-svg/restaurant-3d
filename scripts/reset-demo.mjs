@@ -1,6 +1,6 @@
 /**
  * Respalda los datos actuales (Neon + JSON locales) y restaura los datos
- * de demostración por defecto del proyecto (menú Donde Papá, 8 platos, usuarios
+ * de demostración por defecto del proyecto (menú Donde Papá Restaurant, 8 platos, usuarios
  * y reservas de ejemplo).
  *
  * Uso:  npm run db:reset-demo
@@ -196,7 +196,7 @@ const reservations = [
 ];
 
 const settings = {
-  siteName: "Donde Papá",
+  siteName: "Donde Papá Restaurant",
   siteDescription: "Experiencia gastronómica única",
   logo: "",
   primaryColor: "#8B5CF6",
