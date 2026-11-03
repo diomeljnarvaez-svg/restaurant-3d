@@ -1,4 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="64" fill="#8B5CF6"/>
-  <text x="256" y="340" font-family="serif" font-size="250" font-weight="bold" fill="white" text-anchor="middle">S</text>
+  <defs>
+    <clipPath id="rounded">
+      <rect width="512" height="512" rx="64"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#rounded)">
+    <rect width="512" height="512" fill="#070707"/>
+    <rect y="48" width="512" height="416" fill="#002B7F"/>
+    <rect y="117" width="512" height="278" fill="#FFFFFF"/>
+    <rect y="187" width="512" height="138" fill="#CE1126"/>
+  </g>
+  <text x="256" y="326" font-family="Arial, Helvetica, sans-serif" font-size="192" font-weight="bold" fill="#FFFFFF" text-anchor="middle" stroke="#000000" stroke-width="8" paint-order="stroke">DP</text>
 </svg>

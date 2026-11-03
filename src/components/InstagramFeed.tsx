@@ -28,7 +28,7 @@ export default function InstagramFeed({ primaryColor, pageBg, textPrimary, textS
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-sm font-medium tracking-widest uppercase mb-4" style={{ color: primaryColor }}>Instagram</p>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: textPrimary }}>@savory</h2>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: textPrimary }}>@dondepapa</h2>
           <p className="max-w-xl mx-auto" style={{ color: textSecondary }}>{t("instagram.follow")}</p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">

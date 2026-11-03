@@ -74,7 +74,7 @@ export interface SiteSettings {
 }
 
 export const defaultSettings: SiteSettings = {
-  siteName: "Savory",
+  siteName: "Donde Papá",
   siteDescription: "Experiencia gastronómica única",
   logo: "",
   primaryColor: "#8B5CF6",
@@ -94,7 +94,7 @@ export const defaultSettings: SiteSettings = {
     "Desde 2015, nos dedicamos a crear experiencias culinarias únicas combinando tradición e innovación. Cada plato es una obra de arte preparada con los ingredientes más frescos.",
   address: "Av. Principal 123, Ciudad",
   phone: "+1 234 567 890",
-  email: "info@savory.com",
+  email: "info@dondepapa.com",
   businessHours: "Lun-Dom: 12:00 - 23:00",
   facebook: "https://facebook.com",
   instagram: "https://instagram.com",

@@ -1,4 +1,4 @@
-# Manual de Usuario — Savory Restaurant Web
+# Manual de Usuario — Donde Papá Restaurant Web
 
 Plataforma web moderna para restaurantes con menú interactivo, reservaciones, panel administrativo y PWA.
 
@@ -457,4 +457,4 @@ El servidor corre en el puerto 3000 por defecto. Configurar `PORT=8080 npm start
 
 ---
 
-*Documentación generada para Savory Restaurant Web v1.0*
+*Documentación generada para Donde Papá Restaurant Web v1.0*

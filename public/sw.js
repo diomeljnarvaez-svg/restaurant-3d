@@ -1,4 +1,4 @@
-const CACHE = "savory-v1";
+const CACHE = "dondepapa-v1";
 const urlsToCache = ["/", "/offline"];
 
 self.addEventListener("install", (event: any) => {
@@ -27,7 +27,7 @@ self.addEventListener("fetch", (event: any) => {
 });
 
 self.addEventListener("push", (event: any) => {
-  let data = { title: "Savory", body: "¡Tenemos novedades para ti!", icon: "/icon-192.svg" };
+  let data = { title: "Donde Papá", body: "¡Tenemos novedades para ti!", icon: "/icon-192.svg" };
   try {
     if (event.data) data = { ...data, ...event.data.json() };
   } catch {}

@@ -1,5 +1,5 @@
 {
-  "siteName": "Savory",
+  "siteName": "Donde Papá",
   "siteDescription": "Experiencia gastronómica única",
   "nav": {
     "home": "Inicio",
@@ -162,7 +162,7 @@
     "off": "Activar notificaciones"
   },
   "pwa": {
-    "title": "Instala Savory",
+    "title": "Instala Donde Papá",
     "desc": "Agrega esta app a tu pantalla de inicio",
     "install": "Instalar",
     "later": "Ahora no"
@@ -180,7 +180,7 @@
   "chatbot": {
     "placeholder": "Escribe tu pregunta...",
     "assistant": "Asistente Virtual",
-    "greeting1": "¡Hola! Soy Savy, el asistente virtual de Savory 🎉",
+    "greeting1": "¡Hola! Soy el asistente virtual de Donde Papá 🎉",
     "greeting2": "¿En qué puedo ayudarte hoy?",
     "greeting3": "Puedes preguntarme sobre horarios, menú, reservaciones y más.",
     "faq_hours_q": "horario, abren, cierran, hora",

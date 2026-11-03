@@ -5,6 +5,7 @@ import SchemaScript from "@/components/SchemaScript";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import ChatBot from "@/components/ChatBot";
+import SplashScreen from "@/components/SplashScreen";
 import { getSettings } from "@/lib/db";
 import type { SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
@@ -47,6 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="icon" type="image/svg+xml" href="/icon-192.svg" />
       </head>
       <body className="antialiased">
+        <SplashScreen />
         <SchemaScript settings={s} />
         <ServiceWorkerRegister />
         <Providers>

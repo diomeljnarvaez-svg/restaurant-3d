@@ -45,3 +45,107 @@ body {
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
+
+/* Pantalla de carga con la bandera de Costa Rica */
+.app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #070707;
+  transition: opacity 700ms ease, visibility 700ms ease;
+}
+
+.app-splash.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.app-splash-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.app-splash-flag-wrap {
+  width: min(270px, 72vw);
+  filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.55));
+  margin-bottom: 0.5rem;
+}
+
+.app-splash-flag {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transform-origin: left center;
+  animation: flagWave 2.6s ease-in-out infinite;
+}
+
+.app-splash-shine {
+  animation: flagShine 2.6s ease-in-out infinite;
+}
+
+.app-splash-name {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+}
+
+.app-splash-sub {
+  margin: 0;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #9ca3af;
+}
+
+.app-splash-bar {
+  width: 160px;
+  height: 3px;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.app-splash-bar span {
+  display: block;
+  height: 100%;
+  width: 45%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #002b7f, #ffffff, #ce1126);
+  animation: splashBar 1.3s ease-in-out infinite;
+}
+
+@keyframes flagWave {
+  0%, 100% { transform: perspective(600px) rotateY(0deg) rotateZ(0deg); }
+  50% { transform: perspective(600px) rotateY(-9deg) rotateZ(1.2deg); }
+}
+
+@keyframes flagShine {
+  0% { transform: translateX(0) skewX(-20deg); opacity: 0; }
+  20% { opacity: 0.55; }
+  60%, 100% { transform: translateX(540px) skewX(-20deg); opacity: 0; }
+}
+
+@keyframes splashBar {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(360%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-splash-flag,
+  .app-splash-shine,
+  .app-splash-bar span {
+    animation: none;
+  }
+}
