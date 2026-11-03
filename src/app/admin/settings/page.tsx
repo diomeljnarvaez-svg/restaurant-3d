@@ -37,7 +37,7 @@ const colorAreas = [
 
 export default function AdminSettings() {
   const router = useRouter();
-  const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
+  const [settings, setSettings] = useState<SiteSettings>({ ...defaultSettings, address: "", phone: "", email: "", businessHours: "", whatsappNumber: "", whatsappMessage: "", facebook: "", instagram: "", twitter: "", googleMapsUrl: "", wazeUrl: "", mapEmbedUrl: "" });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
