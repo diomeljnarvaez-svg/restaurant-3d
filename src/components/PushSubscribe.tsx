@@ -8,7 +8,12 @@ export default function PushSubscribe() {
   const { t } = useTranslations();
   const mounted = useMounted();
   const [subscribed, setSubscribed] = useState(false);
+  const [vapidKey, setVapidKey] = useState("BC2hcB3v7SHNZo9uRwtgX8SjCvYCqu_firvoUG2RThKuYmd800jez4Dh3qSBDTgdmZH-18o6HhSOCQda0SNriGk");
   const supported = mounted && "serviceWorker" in navigator && "PushManager" in window;
+
+  useEffect(() => {
+    fetch("/api/settings").then(r => r.json()).then(s => { if (s.vapidPublicKey) setVapidKey(s.vapidPublicKey); }).catch(() => {});
+  }, []);
 
   const subscribe = async () => {
     if (!supported) return;
@@ -16,7 +21,7 @@ export default function PushSubscribe() {
       const reg = await navigator.serviceWorker.ready;
       const sub = await reg.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array("BC2hcB3v7SHNZo9uRwtgX8SjCvYCqu_firvoUG2RThKuYmd800jez4Dh3qSBDTgdmZH-18o6HhSOCQda0SNriGk"),
+        applicationServerKey: urlBase64ToUint8Array(vapidKey),
       });
       await fetch("/api/push/subscribe", {
         method: "POST",

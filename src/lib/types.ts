@@ -75,6 +75,8 @@ export interface SiteSettings {
   googleMapsUrl: string;
   wazeUrl: string;
   mapEmbedUrl: string;
+  vapidPublicKey: string;
+  vapidPrivateKey: string;
   reservationsEnabled: boolean;
   maxGuestsPerReservation: number;
   reservationNotice: string;
@@ -113,6 +115,8 @@ export const defaultSettings: SiteSettings = {
   googleMapsUrl: "",
   wazeUrl: "",
   mapEmbedUrl: "",
+  vapidPublicKey: "BC2hcB3v7SHNZo9uRwtgX8SjCvYCqu_firvoUG2RThKuYmd800jez4Dh3qSBDTgdmZH-18o6HhSOCQda0SNriGk",
+  vapidPrivateKey: "",
   reservationsEnabled: true,
   maxGuestsPerReservation: 10,
   reservationNotice: "Solicita tu reservación con al menos 2 horas de anticipación.",

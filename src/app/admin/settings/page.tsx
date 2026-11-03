@@ -329,6 +329,22 @@ export default function AdminSettings() {
           </div>
         </section>
 
+        {/* Push Notifications */}
+        <section className="p-6 rounded-2xl border border-white/10 bg-white/5">
+          <h2 className="text-lg font-semibold text-white mb-4">Notificaciones Push</h2>
+          <p className="text-sm text-gray-400 mb-4">Claves VAPID para activar las notificaciones push. La clave pública se usa en el navegador; la privada se mantiene en el servidor.</p>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Clave pública (VAPID)</label>
+              <input value={settings.vapidPublicKey} onChange={e => update("vapidPublicKey", e.target.value)} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none font-mono text-xs" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Clave privada (VAPID)</label>
+              <input type="password" value={settings.vapidPrivateKey} onChange={e => update("vapidPrivateKey", e.target.value)} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none font-mono text-xs" placeholder="Guardar para envíos desde el servidor" />
+            </div>
+          </div>
+        </section>
+
         {/* WhatsApp */}
         <section className="p-6 rounded-2xl border border-white/10 bg-white/5">
           <h2 className="text-lg font-semibold text-white mb-4">WhatsApp</h2>
