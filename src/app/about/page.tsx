@@ -7,20 +7,36 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useTranslations } from "@/lib/i18n";
 import { useMounted } from "@/lib/use-mounted";
+import CostaRicaFlag from "@/components/CostaRicaFlag";
 import type { SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
 
 export default function AboutPage() {
   const { t } = useTranslations();
-  const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
+  const [settings, setSettings] = useState<SiteSettings>({ ...defaultSettings, aboutTitle: "", aboutContent: "", address: "", phone: "", email: "", businessHours: "", whatsappNumber: "", whatsappMessage: "" });
+  const [loading, setLoading] = useState(true);
   const mounted = useMounted();
 
   useEffect(() => {
-    fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
+    fetch("/api/settings").then(r => r.json()).then(s => { setSettings(s); setLoading(false); }).catch(() => setLoading(false));
   }, []);
 
   if (!mounted) return null;
   const { primaryColor, pageBg, cardBg, textPrimary, textSecondary, footerBg } = settings;
+
+  if (loading) {
+    return (
+      <div style={{ backgroundColor: pageBg, color: textPrimary, minHeight: "100vh" }}>
+        <Header siteName={settings.siteName || "Donde Papá Restaurant"} primaryColor={primaryColor} />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <CostaRicaFlag width={80} height={48} />
+            <p style={{ color: textSecondary }}>Cargando...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: pageBg, color: textPrimary, minHeight: "100vh" }}>
