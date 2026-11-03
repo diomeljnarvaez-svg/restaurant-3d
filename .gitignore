@@ -44,6 +44,7 @@ next-env.d.ts
 src/data/users.json
 src/data/reservations.json
 server.log
+backups/
 
 .vercel
 .env*

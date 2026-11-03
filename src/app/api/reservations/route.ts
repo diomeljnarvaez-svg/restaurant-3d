@@ -3,7 +3,7 @@ import { getAll, create } from "@/lib/db";
 import type { Reservation } from "@/lib/types";
 
 export async function GET() {
-  const reservations = getAll<Reservation>("reservations");
+  const reservations = await getAll<Reservation>("reservations");
   return NextResponse.json(reservations.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
 }
 
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       createdAt: new Date().toISOString(),
     };
 
-    const created = create("reservations", reservation);
+    const created = await create("reservations", reservation);
     return NextResponse.json(created, { status: 201 });
   } catch {
     return NextResponse.json({ error: "Error al crear reservación" }, { status: 500 });

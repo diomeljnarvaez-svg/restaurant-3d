@@ -3,7 +3,7 @@ import { defaultSettings } from "@/lib/types";
 
 export async function GET() {
   let settings;
-  try { settings = getSettings("settings"); } catch { settings = null; }
+  try { settings = await getSettings("settings"); } catch { settings = null; }
   const s = settings || defaultSettings;
 
   const staticRoutes = [

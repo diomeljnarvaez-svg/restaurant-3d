@@ -11,7 +11,7 @@ import { defaultSettings } from "@/lib/types";
 
 export async function generateMetadata(): Promise<Metadata> {
   let raw;
-  try { raw = getSettings("settings"); } catch { raw = null; }
+  try { raw = await getSettings("settings"); } catch { raw = null; }
   const s: SiteSettings = raw ? { ...defaultSettings, ...raw } : defaultSettings;
   return {
     title: s.siteName,
@@ -32,9 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   let raw;
-  try { raw = getSettings("settings"); } catch { raw = null; }
+  try { raw = await getSettings("settings"); } catch { raw = null; }
   const s: SiteSettings = raw ? { ...defaultSettings, ...raw } : defaultSettings;
 
   return (

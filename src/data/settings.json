@@ -1,8 +1,15 @@
 {
   "siteName": "Savory",
   "siteDescription": "Experiencia gastronómica única",
-  "primaryColor": "#EAB308",
-  "secondaryColor": "#10B981",
+  "logo": "",
+  "primaryColor": "#8B5CF6",
+  "secondaryColor": "#EC4899",
+  "heroBg": "#000000",
+  "pageBg": "#000000",
+  "cardBg": "#0a0a0a",
+  "footerBg": "#000000",
+  "textPrimary": "#FFFFFF",
+  "textSecondary": "#9CA3AF",
   "whatsappNumber": "1234567890",
   "whatsappMessage": "¡Hola! Quiero hacer una reservación.",
   "heroTitle": "Una Experiencia Gastronómica Inolvidable",
@@ -18,9 +25,5 @@
   "twitter": "https://twitter.com",
   "reservationsEnabled": true,
   "maxGuestsPerReservation": 10,
-  "reservationNotice": "Solicita tu reservación con al menos 2 horas de anticipación.",
-  "heroBg": "#EAB308",
-  "pageBg": "#000000",
-  "textPrimary": "#FFFFFF",
-  "textSecondary": "#FFFFFF"
+  "reservationNotice": "Solicita tu reservación con al menos 2 horas de anticipación."
 }

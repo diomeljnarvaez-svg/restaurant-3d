@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { getAll } from "./db";
+import bcrypt from "bcryptjs";
 import type { User } from "./types";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -15,13 +16,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const email = credentials?.email as string;
         const password = credentials?.password as string;
 
-        const users = getAll<User>("users");
-        const user = users.find((u) => u.email === email && u.password === password);
+        const users = await getAll<User>("users");
+        const user = users.find((u) => u.email === email);
 
-        if (user) {
-          return { id: user.id, name: user.name, email: user.email, role: user.role };
-        }
-        return null;
+        if (!user) return null;
+        const valid = user.password.startsWith("$2")
+          ? await bcrypt.compare(password, user.password)
+          : user.password === password;
+        if (!valid) return null;
+
+        return { id: user.id, name: user.name, email: user.email, role: user.role };
       },
     }),
   ],
