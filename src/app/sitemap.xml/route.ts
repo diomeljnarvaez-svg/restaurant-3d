@@ -1,11 +1,4 @@
-import { getSettings } from "@/lib/db";
-import { defaultSettings } from "@/lib/types";
-
 export async function GET() {
-  let settings;
-  try { settings = await getSettings("settings"); } catch { settings = null; }
-  const s = settings || defaultSettings;
-
   const staticRoutes = [
     "", "/menu", "/about", "/contact", "/reservar", "/login",
   ];

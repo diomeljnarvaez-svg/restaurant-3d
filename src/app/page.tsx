@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Hero3D from "@/components/Hero3D";
 import Header from "@/components/Header";
@@ -9,19 +10,19 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import InstagramFeed from "@/components/InstagramFeed";
 import PushSubscribe from "@/components/PushSubscribe";
 import ProductImage from "@/components/ProductImage";
-import { useTranslations } from "@/lib/i18n";
+import { useTranslations, dicts } from "@/lib/i18n";
 import { formatPrice } from "@/lib/format";
+import { useMounted } from "@/lib/use-mounted";
 import type { Product, SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
 
 export default function HomePage() {
-  const { t } = useTranslations();
+  const { t, lang } = useTranslations();
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [products, setProducts] = useState<Product[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
     fetch("/api/products").then(r => r.json()).then((p: Product[]) => setProducts(p.filter(x => x.featured))).catch(() => {});
   }, []);
@@ -140,9 +141,12 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden border" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
                   alt="Restaurante"
+                  width={800}
+                  height={800}
+                  unoptimized
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -169,7 +173,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[0, 1, 2].map((i) => {
-              const item = t(`testimonials.items.${i}`) as any || { name: "", text: "", role: "" };
+              const item = dicts[lang].testimonials.items[i] ?? { name: "", text: "", role: "" };
               return (
               <div
                 key={i}
@@ -183,7 +187,7 @@ export default function HomePage() {
                     </svg>
                   ))}
                 </div>
-                <p className="mb-6 leading-relaxed" style={{ color: textSecondary }}>"{item.text}"</p>
+                <p className="mb-6 leading-relaxed" style={{ color: textSecondary }}>&quot;{item.text}&quot;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold" style={{ backgroundColor: primaryColor + "33", color: textPrimary }}>
                     {item.name?.charAt(0)}

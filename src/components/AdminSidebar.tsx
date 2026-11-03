@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import type { Reservation } from "@/lib/types";
 
 interface Props {
   siteName: string;
@@ -19,7 +20,7 @@ export default function AdminSidebar({ siteName, primaryColor, userRole, open, o
   useEffect(() => {
     fetch("/api/reservations")
       .then(r => r.json())
-      .then((res: any[]) => setPendingCount(res.filter((r: any) => r.status === "pending").length))
+      .then((res: Reservation[]) => setPendingCount(res.filter((r) => r.status === "pending").length))
       .catch(() => {});
   }, []);
 

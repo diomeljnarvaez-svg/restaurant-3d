@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
+import { useMounted } from "@/lib/use-mounted";
 
 export default function AdminDashboard() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/products").then(r => r.json()).then(setProducts).catch(() => {});
   }, []);
 

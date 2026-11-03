@@ -8,6 +8,6 @@ export async function GET() {
   if (!auth.ok) return auth.response;
 
   const users = await getAll<User>("users");
-  const safe = users.map(({ password, ...u }) => u);
+  const safe = users.map(({ password: _password, ...u }) => u);
   return NextResponse.json(safe);
 }

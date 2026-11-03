@@ -12,6 +12,7 @@ import ProductImage from "@/components/ProductImage";
 import { detectDietaryBadges } from "@/lib/dietary";
 import { formatPrice } from "@/lib/format";
 import { useTranslations } from "@/lib/i18n";
+import { useMounted } from "@/lib/use-mounted";
 import type { Product, SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
 
@@ -22,10 +23,9 @@ export default function MenuDetailPage() {
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
     fetch("/api/products").then(r => r.json()).then((products: Product[]) => {
       const found = products.find(p => p.slug === slug);
@@ -35,7 +35,7 @@ export default function MenuDetailPage() {
   }, [slug]);
 
   if (!mounted || loading) return null;
-  const { primaryColor, pageBg, cardBg, textPrimary, textSecondary, footerBg } = settings;
+  const { primaryColor, pageBg, textPrimary, textSecondary, footerBg } = settings;
 
   if (!product) {
     return (

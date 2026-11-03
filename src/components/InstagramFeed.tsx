@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "@/lib/i18n";
+import Image from "next/image";
 
 const mockPosts = [
   { id: "1", image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=80", likes: 245 },
@@ -19,7 +20,7 @@ interface Props {
   textSecondary: string;
 }
 
-export default function InstagramFeed({ primaryColor, pageBg, cardBg, textPrimary, textSecondary }: Props) {
+export default function InstagramFeed({ primaryColor, pageBg, textPrimary, textSecondary }: Props) {
   const { t } = useTranslations();
 
   return (
@@ -40,7 +41,7 @@ export default function InstagramFeed({ primaryColor, pageBg, cardBg, textPrimar
               className="group relative aspect-square rounded-xl overflow-hidden border"
               style={{ borderColor: "rgba(255,255,255,0.1)" }}
             >
-              <img src={post.image} alt={t(`instagram.caption${post.id}`)} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <Image src={post.image} alt={t(`instagram.caption${post.id}`)} width={400} height={400} unoptimized className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center text-white">
                   <div className="flex items-center justify-center gap-1 mb-1">

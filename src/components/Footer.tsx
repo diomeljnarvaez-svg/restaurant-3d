@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import MapLinks from "@/components/MapLinks";
 import { useTranslations } from "@/lib/i18n";
+import { useMounted } from "@/lib/use-mounted";
 
 interface Props {
   siteName: string;
@@ -22,8 +21,7 @@ interface Props {
 
 export default function Footer({ siteName, primaryColor, footerBg, textPrimary, textSecondary, address, phone, email, businessHours, facebook, instagram, twitter }: Props) {
   const { t } = useTranslations();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
   if (!mounted) return null;
 
   return (

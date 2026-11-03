@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
-import type { SiteSettings } from "@/lib/types";
+import type { SiteSettings, UserRole } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
+import { useMounted } from "@/lib/use-mounted";
 
 const allowedRoles = ["superadmin", "admin", "editor"];
 
@@ -14,11 +15,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter();
   const pathname = usePathname();
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
   }, []);
 
@@ -41,8 +41,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (status === "unauthenticated") return null;
 
-  const user = session?.user as any;
-  if (!allowedRoles.includes(user?.role)) {
+  const user = session?.user as { role?: UserRole } | undefined;
+  if (!user?.role || !allowedRoles.includes(user.role)) {
     router.push("/");
     return null;
   }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useTranslations, dicts, type Dict } from "@/lib/i18n";
+import { useMounted } from "@/lib/use-mounted";
 
 interface Message {
   type: "bot" | "user";
@@ -37,29 +38,27 @@ export default function ChatBot() {
   const [started, setStarted] = useState(false);
   const [primaryColor, setPrimaryColor] = useState("#8B5CF6");
   const bottomRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => { setMounted(true); }, []);
+  const mounted = useMounted();
 
   useEffect(() => {
     fetch("/api/settings").then(r => r.json()).then(s => setPrimaryColor(s.primaryColor || "#8B5CF6")).catch(() => {});
   }, []);
 
   useEffect(() => {
-    if (open && !started) {
-      setStarted(true);
-      const initial: Message[] = [
-        { type: "bot" as const, text: t("chatbot.greeting1") },
-        { type: "bot" as const, text: t("chatbot.greeting2") },
-        { type: "bot" as const, text: t("chatbot.greeting3") },
-      ];
-      setMessages(initial);
-    }
-  }, [open, started, t]);
-
-  useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const handleToggle = () => {
+    if (!open && !started) {
+      setStarted(true);
+      setMessages([
+        { type: "bot", text: t("chatbot.greeting1") },
+        { type: "bot", text: t("chatbot.greeting2") },
+        { type: "bot", text: t("chatbot.greeting3") },
+      ]);
+    }
+    setOpen(!open);
+  };
 
   const handleSend = () => {
     const text = input.trim();
@@ -78,7 +77,7 @@ export default function ChatBot() {
     <>
       {/* Chat button */}
       <button
-        onClick={() => setOpen(!open)}
+        onClick={handleToggle}
         className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all hover:scale-110"
         style={{ backgroundColor: primaryColor }}
         aria-label="Chat"

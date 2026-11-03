@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import type { LoyaltyEntry } from "@/lib/types";
+import { useMounted } from "@/lib/use-mounted";
 
 export default function AdminLoyalty() {
   const [entries, setEntries] = useState<LoyaltyEntry[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [editing, setEditing] = useState<LoyaltyEntry | null>(null);
 
   const fetchLoyalty = () => {
@@ -13,7 +14,6 @@ export default function AdminLoyalty() {
   };
 
   useEffect(() => {
-    setMounted(true);
     fetchLoyalty();
   }, []);
 

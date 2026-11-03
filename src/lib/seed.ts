@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
-import type { Product, User, Reservation, SiteSettings } from "./types";
+import type { Product, User, Reservation } from "./types";
 import { defaultSettings } from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "src", "data");
 
-function writeJSON(name: string, data: any) {
+function writeJSON(name: string, data: unknown) {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
   fs.writeFileSync(path.join(DATA_DIR, `${name}.json`), JSON.stringify(data, null, 2));
 }

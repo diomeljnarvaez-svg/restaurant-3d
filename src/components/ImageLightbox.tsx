@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Props {
   src: string;
@@ -8,7 +9,7 @@ interface Props {
   primaryColor: string;
 }
 
-export default function ImageLightbox({ src, alt, primaryColor }: Props) {
+export default function ImageLightbox({ src, alt }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function ImageLightbox({ src, alt, primaryColor }: Props) {
   return (
     <>
       <button onClick={() => setOpen(true)} className="w-full h-full cursor-pointer" aria-label="Ampliar imagen">
-        <img src={src} alt={alt} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+        <Image src={src} alt={alt} width={800} height={600} unoptimized className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
       </button>
 
       {open && (
@@ -37,9 +38,12 @@ export default function ImageLightbox({ src, alt, primaryColor }: Props) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          <img
+          <Image
             src={src}
             alt={alt}
+            width={1600}
+            height={1200}
+            unoptimized
             className="max-w-[90vw] max-h-[90vh] object-contain rounded-2xl"
             onClick={e => e.stopPropagation()}
           />

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Product, Reservation } from "@/lib/types";
+import { useMounted } from "@/lib/use-mounted";
 
 function SimpleBar({ data, color }: { data: { label: string; value: number }[]; color: string }) {
   const max = Math.max(...data.map(d => d.value), 1);
@@ -24,10 +25,9 @@ function SimpleBar({ data, color }: { data: { label: string; value: number }[]; 
 export default function AdminAnalytics() {
   const [products, setProducts] = useState<Product[]>([]);
   const [reservations, setReservations] = useState<Reservation[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     Promise.all([
       fetch("/api/products").then(r => r.json()),
       fetch("/api/reservations").then(r => r.json()),

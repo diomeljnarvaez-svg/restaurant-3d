@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import QRCode from "qrcode";
+import { useMounted } from "@/lib/use-mounted";
 
 interface Props {
   url: string;
@@ -13,10 +14,10 @@ interface Props {
 
 export default function QRCodeDisplay({ url, size = 96, label, downloadable = false, downloadLabel = "Descargar QR" }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
+    if (!mounted) return;
     if (canvasRef.current) {
       QRCode.toCanvas(canvasRef.current, url, {
         width: size,
@@ -24,7 +25,7 @@ export default function QRCodeDisplay({ url, size = 96, label, downloadable = fa
         color: { dark: "#ffffff", light: "#00000000" },
       });
     }
-  }, [url, size]);
+  }, [mounted, url, size]);
 
   const handleDownload = () => {
     const offscreen = document.createElement("canvas");

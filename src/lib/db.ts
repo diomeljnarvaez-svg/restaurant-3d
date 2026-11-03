@@ -68,13 +68,13 @@ function fileWrite(name: string, data: unknown) {
   fs.writeFileSync(path.join(DATA_DIR, `${name}.json`), JSON.stringify(data, null, 2));
 }
 
-function fileGetSettings(name: string): Record<string, any> | null {
+function fileGetSettings(name: string): Record<string, unknown> | null {
   const fp = path.join(DATA_DIR, `${name}.json`);
   if (!fs.existsSync(fp)) return null;
   return JSON.parse(fs.readFileSync(fp, "utf-8"));
 }
 
-function fileSaveSettings(name: string, data: Record<string, any>) {
+function fileSaveSettings(name: string, data: Record<string, unknown>) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
   fs.writeFileSync(path.join(DATA_DIR, `${name}.json`), JSON.stringify(data, null, 2));
 }
@@ -138,14 +138,14 @@ export async function remove<T extends { id: string }>(name: string, id: string)
   return removed;
 }
 
-export async function getSettings(name: string): Promise<Record<string, any> | null> {
+export async function getSettings(name: string): Promise<Record<string, unknown> | null> {
   if (!pool) return fileGetSettings(name);
   await ensureTable();
-  const v = await readKV<Record<string, any>>(name);
+  const v = await readKV<Record<string, unknown>>(name);
   return v && typeof v === "object" && !Array.isArray(v) ? v : null;
 }
 
-export async function saveSettings(name: string, data: Record<string, any>): Promise<void> {
+export async function saveSettings(name: string, data: Record<string, unknown>): Promise<void> {
   if (!pool) {
     fileSaveSettings(name, data);
     return;

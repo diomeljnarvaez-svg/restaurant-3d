@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "@/lib/i18n";
+import { useMounted } from "@/lib/use-mounted";
 
 export default function OfflinePage() {
   const { t } = useTranslations();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
   if (!mounted) return null;
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 
 interface Props {
   number: string;
@@ -8,9 +8,8 @@ interface Props {
   primaryColor: string;
 }
 
-export default function WhatsAppButton({ number, message, primaryColor }: Props) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+export default function WhatsAppButton({ number, message }: Props) {
+  const mounted = useMounted();
 
   if (!mounted || !number) return null;
 

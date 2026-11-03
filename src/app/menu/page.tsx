@@ -6,11 +6,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import QRCodeDisplay from "@/components/QRCodeDisplay";
-import ImageLightbox from "@/components/ImageLightbox";
 import ProductImage from "@/components/ProductImage";
 import { detectDietaryBadges } from "@/lib/dietary";
 import { formatPrice } from "@/lib/format";
 import { useTranslations } from "@/lib/i18n";
+import { useMounted } from "@/lib/use-mounted";
 import type { Product, SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
 
@@ -19,10 +19,9 @@ export default function MenuPage() {
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
   const [products, setProducts] = useState<Product[]>([]);
   const [category, setCategory] = useState("Todas");
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
     fetch("/api/products").then(r => r.json()).then(setProducts).catch(() => {});
   }, []);

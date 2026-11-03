@@ -2,17 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "@/lib/i18n";
+import { useMounted } from "@/lib/use-mounted";
 
 export default function PushSubscribe() {
   const { t } = useTranslations();
-  const [supported, setSupported] = useState(false);
+  const mounted = useMounted();
   const [subscribed, setSubscribed] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    setSupported("serviceWorker" in navigator && "PushManager" in window);
-  }, []);
+  const supported = mounted && "serviceWorker" in navigator && "PushManager" in window;
 
   const subscribe = async () => {
     if (!supported) return;

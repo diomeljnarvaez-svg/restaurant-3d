@@ -1,14 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 
 interface Props {
   address: string;
 }
 
 export default function MapLinks({ address }: Props) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  const mounted = useMounted();
 
   const encoded = encodeURIComponent(address);
   const googleUrl = `https://www.google.com/maps/dir/?api=1&destination=${encoded}`;

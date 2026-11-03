@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useTranslations } from "@/lib/i18n";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { defaultSettings } from "@/lib/types";
+import type { UserRole } from "@/lib/types";
 
 interface Props {
   siteName: string;
@@ -14,7 +15,7 @@ interface Props {
 
 export default function Header({ siteName, primaryColor }: Props) {
   const { data: session } = useSession();
-  const user = session?.user as any;
+  const user = session?.user as { role?: UserRole } | undefined;
   const { t } = useTranslations();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,7 +41,7 @@ export default function Header({ siteName, primaryColor }: Props) {
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Link href="/" className="flex items-center gap-2">
             {logo ? (
-              <img src={logo} alt={siteName} className="h-10 w-auto max-w-[180px] object-contain" />
+              <Image src={logo} alt={siteName} width={180} height={40} unoptimized className="h-10 w-auto max-w-[180px] object-contain" />
             ) : (
               <span className="text-2xl font-bold tracking-tight" style={{ color: primaryColor }}>
                 {siteName}
@@ -54,7 +55,7 @@ export default function Header({ siteName, primaryColor }: Props) {
             <Link href="/reservar" className="text-sm text-gray-300 hover:text-white transition-colors">{t("nav.reservar")}</Link>
             <Link href="/about" className="text-sm text-gray-300 hover:text-white transition-colors">{t("nav.about")}</Link>
             <Link href="/contact" className="text-sm text-gray-300 hover:text-white transition-colors">{t("nav.contact")}</Link>
-            {["superadmin", "admin", "editor"].includes(user?.role) && (
+            {!!user?.role && ["superadmin", "admin", "editor"].includes(user.role) && (
               <Link href="/admin" className="text-sm text-gray-300 hover:text-white transition-colors">{t("nav.admin")}</Link>
             )}
             <LanguageSwitcher />
@@ -86,7 +87,7 @@ export default function Header({ siteName, primaryColor }: Props) {
             <Link href="/reservar" onClick={() => setMenuOpen(false)} className="block text-gray-300 hover:text-white py-2">{t("nav.reservar")}</Link>
             <Link href="/about" onClick={() => setMenuOpen(false)} className="block text-gray-300 hover:text-white py-2">{t("nav.about")}</Link>
             <Link href="/contact" onClick={() => setMenuOpen(false)} className="block text-gray-300 hover:text-white py-2">{t("nav.contact")}</Link>
-            {["superadmin", "admin", "editor"].includes(user?.role) && (
+            {!!user?.role && ["superadmin", "admin", "editor"].includes(user.role) && (
               <Link href="/admin" onClick={() => setMenuOpen(false)} className="block text-gray-300 hover:text-white py-2">{t("nav.admin")}</Link>
             )}
             {session ? (

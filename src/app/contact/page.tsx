@@ -6,21 +6,21 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MapLinks from "@/components/MapLinks";
 import { useTranslations } from "@/lib/i18n";
+import { useMounted } from "@/lib/use-mounted";
 import type { SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
 
 export default function ContactPage() {
   const { t } = useTranslations();
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
   }, []);
 
   if (!mounted) return null;
-  const { primaryColor, pageBg, cardBg, textPrimary, textSecondary, footerBg } = settings;
+  const { primaryColor, pageBg, textPrimary, textSecondary, footerBg } = settings;
 
   return (
     <div style={{ backgroundColor: pageBg, color: textPrimary, minHeight: "100vh" }}>

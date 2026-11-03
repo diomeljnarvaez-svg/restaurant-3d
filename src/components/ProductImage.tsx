@@ -1,6 +1,7 @@
 "use client";
 
 import type { Product } from "@/lib/types";
+import Image from "next/image";
 
 interface Props {
   product: Pick<Product, "name" | "image">;
@@ -13,7 +14,7 @@ export default function ProductImage({ product, primaryColor, aspect = "aspect-[
   if (product.image) {
     return (
       <div className={`${aspect} overflow-hidden ${className}`}>
-        <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+        <Image src={product.image} alt={product.name} width={800} height={600} unoptimized className="w-full h-full object-cover" />
       </div>
     );
   }

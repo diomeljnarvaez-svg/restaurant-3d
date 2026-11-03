@@ -1,20 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useTranslations } from "@/lib/i18n";
+import { useMounted } from "@/lib/use-mounted";
 import type { SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
 
 export default function AboutPage() {
   const { t } = useTranslations();
   const [settings, setSettings] = useState<SiteSettings>(defaultSettings);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/settings").then(r => r.json()).then(setSettings).catch(() => {});
   }, []);
 
@@ -33,7 +34,7 @@ export default function AboutPage() {
               <p className="leading-relaxed text-lg" style={{ color: textSecondary }}>{settings.aboutContent}</p>
             </div>
             <div className="rounded-2xl overflow-hidden border" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
-              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Restaurante" className="w-full h-[400px] object-cover" />
+              <Image src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Restaurante" width={800} height={400} unoptimized className="w-full h-[400px] object-cover" />
             </div>
           </div>
 

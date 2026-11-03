@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { User, UserRole } from "@/lib/types";
+import { useMounted } from "@/lib/use-mounted";
 
 const roleLabels: Record<UserRole, string> = {
   superadmin: "Super Admin",
@@ -19,7 +20,7 @@ const roleColors: Record<UserRole, string> = {
 
 export default function AdminUsers() {
   const [users, setUsers] = useState<User[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "", role: "editor" as UserRole });
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -29,14 +30,13 @@ export default function AdminUsers() {
   };
 
   useEffect(() => {
-    setMounted(true);
     fetchUsers();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (editingId) {
-      const updates: any = { name: form.name, email: form.email, role: form.role };
+      const updates: Partial<User> = { name: form.name, email: form.email, role: form.role };
       if (form.password) updates.password = form.password;
       await fetch(`/api/users/${editingId}`, {
         method: "PUT",

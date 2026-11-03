@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import type { Reservation } from "@/lib/types";
+import { useMounted } from "@/lib/use-mounted";
 
 export default function AdminReservations() {
   const [reservations, setReservations] = useState<Reservation[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/reservations").then(r => r.json()).then(setReservations).catch(() => {});
   }, []);
 
@@ -124,7 +124,7 @@ function ReservationCard({
               <p className="text-gray-400 text-xs">{r.email}</p>
             </div>
           </div>
-          {r.notes && <p className="text-gray-400 text-sm mt-2 italic">"{r.notes}"</p>}
+          {r.notes && <p className="text-gray-400 text-sm mt-2 italic">&quot;{r.notes}&quot;</p>}
         </div>
         <div className="flex gap-2 flex-shrink-0">
           {r.status === "pending" && (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type { SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
@@ -65,7 +66,7 @@ export default function AdminSettings() {
     }
   };
 
-  const update = (key: keyof SiteSettings, value: any) => {
+  const update = <K extends keyof SiteSettings>(key: K, value: SiteSettings[K]) => {
     setSettings(prev => ({ ...prev, [key]: value }));
   };
 
@@ -107,7 +108,7 @@ export default function AdminSettings() {
               <div className="flex items-center gap-4">
                 {settings.logo ? (
                   <div className="relative w-20 h-20 rounded-xl border border-white/10 overflow-hidden bg-white/5 flex-shrink-0">
-                    <img src={settings.logo} alt="Logo" className="w-full h-full object-contain" />
+                    <Image src={settings.logo} alt="Logo" width={80} height={80} unoptimized className="w-full h-full object-contain" />
                     <button
                       onClick={() => update("logo", "")}
                       className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs hover:bg-red-600"
@@ -153,10 +154,10 @@ export default function AdminSettings() {
             <h2 className="text-lg font-semibold text-white">Paleta de Colores</h2>
             <button
               onClick={() => {
-                const colorKeys = ["primaryColor","secondaryColor","heroBg","pageBg","cardBg","footerBg","textPrimary","textSecondary"];
+                const colorKeys: (keyof SiteSettings)[] = ["primaryColor","secondaryColor","heroBg","pageBg","cardBg","footerBg","textPrimary","textSecondary"];
                 setSettings(prev => {
                   const next = { ...prev };
-                  colorKeys.forEach(k => (next as any)[k] = (defaultSettings as any)[k]);
+                  colorKeys.forEach(k => Object.assign(next, { [k]: defaultSettings[k] }));
                   return next;
                 });
               }}
@@ -175,8 +176,8 @@ export default function AdminSettings() {
                   {colorOptions.map(c => (
                     <button
                       key={c.value}
-                      onClick={() => update(area.key as any, c.value)}
-                      className={`w-7 h-7 rounded-full transition-all ${(settings as any)[area.key] === c.value ? "ring-2 ring-white ring-offset-1 ring-offset-black scale-110" : "hover:scale-110"}`}
+                      onClick={() => update(area.key, c.value)}
+                      className={`w-7 h-7 rounded-full transition-all ${settings[area.key] === c.value ? "ring-2 ring-white ring-offset-1 ring-offset-black scale-110" : "hover:scale-110"}`}
                       style={{ backgroundColor: c.value, border: c.value === "#FFFFFF" || c.value === "#f3f4f6" ? "1px solid rgba(255,255,255,0.2)" : "none" }}
                       title={c.label}
                     />
@@ -185,17 +186,17 @@ export default function AdminSettings() {
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
-                    value={(settings as any)[area.key] || ""}
-                    onChange={e => update(area.key as any, e.target.value)}
+                    value={settings[area.key] || ""}
+                    onChange={e => update(area.key, e.target.value)}
                     className="flex-1 px-2.5 py-1 text-xs font-mono bg-white/5 border border-white/10 rounded text-white outline-none"
                     placeholder="#000000"
                   />
                   <div
                     className="w-6 h-6 rounded flex-shrink-0 border border-white/10"
-                    style={{ backgroundColor: (settings as any)[area.key] || "#000" }}
+                    style={{ backgroundColor: settings[area.key] || "#000" }}
                   />
                   <button
-                    onClick={() => update(area.key as any, (defaultSettings as any)[area.key])}
+                    onClick={() => update(area.key, defaultSettings[area.key])}
                     className="w-6 h-6 flex items-center justify-center rounded text-gray-500 hover:text-white hover:bg-white/10 transition-all text-sm"
                     title="Restablecer color predeterminado"
                   >

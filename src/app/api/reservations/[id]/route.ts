@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getById, update, remove } from "@/lib/db";
+import { update, remove } from "@/lib/db";
 import { guard, STAFF_ROLES } from "@/lib/api-auth";
 import type { Reservation } from "@/lib/types";
 

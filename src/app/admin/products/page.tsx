@@ -1,16 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
+import { useMounted } from "@/lib/use-mounted";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     fetch("/api/products").then(r => r.json()).then(setProducts).catch(() => {});
   }, []);
 
@@ -63,7 +64,7 @@ export default function AdminProducts() {
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-white/10 flex items-center justify-center">
                         {p.image ? (
-                          <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                          <Image src={p.image} alt={p.name} width={40} height={40} unoptimized className="w-full h-full object-cover" />
                         ) : (
                           <span className="text-sm font-semibold text-purple-300">{p.name.charAt(0).toUpperCase()}</span>
                         )}

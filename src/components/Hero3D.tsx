@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useMounted } from "@/lib/use-mounted";
 
 export default function Hero3D({ primaryColor, secondaryColor }: { primaryColor: string; secondaryColor: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
 
   useEffect(() => {
     if (!mounted) return;

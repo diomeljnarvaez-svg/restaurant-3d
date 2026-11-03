@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useCallback, useSyncExternalStore, type ReactNode } from "react";
 import es from "./es.json";
 import en from "./en.json";
 
@@ -12,8 +12,40 @@ const dicts: Record<Lang, Dict> = { es, en };
 export { dicts };
 export type { Lang, Dict };
 
-function getNested(obj: any, path: string): string {
-  return path.split(".").reduce((acc, key) => acc?.[key], obj) ?? path;
+function getNested(obj: unknown, path: string): string {
+  const value = path.split(".").reduce<unknown>((acc, key) => {
+    if (acc && typeof acc === "object" && key in acc) {
+      return (acc as Record<string, unknown>)[key];
+    }
+    return undefined;
+  }, obj);
+  return typeof value === "string" ? value : path;
+}
+
+const listeners = new Set<() => void>();
+
+function emitLang() {
+  listeners.forEach((listener) => listener());
+}
+
+function subscribeLang(callback: () => void) {
+  listeners.add(callback);
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === "lang") callback();
+  };
+  window.addEventListener("storage", onStorage);
+  return () => {
+    listeners.delete(callback);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+function getLangSnapshot(): Lang {
+  return localStorage.getItem("lang") === "en" ? "en" : "es";
+}
+
+function getServerLangSnapshot(): Lang {
+  return "es";
 }
 
 interface I18nCtx {
@@ -31,37 +63,19 @@ const Ctx = createContext<I18nCtx>({
 });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("es");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem("lang") as Lang | null;
-    if (stored === "en" || stored === "es") setLangState(stored);
-  }, []);
+  const lang = useSyncExternalStore(subscribeLang, getLangSnapshot, getServerLangSnapshot);
 
   const setLang = useCallback((l: Lang) => {
-    setLangState(l);
     localStorage.setItem("lang", l);
+    emitLang();
   }, []);
 
-  const t = useCallback(
-    (path: string) => getNested(dicts[lang], path),
-    [lang]
-  );
+  const t = useCallback((path: string) => getNested(dicts[lang], path), [lang]);
 
   const tc = useCallback(
     (category: string) => (dicts[lang]?.categories as Record<string, string> | undefined)?.[category] ?? category,
     [lang]
   );
-
-  if (!mounted) {
-    return (
-      <Ctx.Provider value={{ lang: "es", setLang, t, tc }}>
-        {children}
-      </Ctx.Provider>
-    );
-  }
 
   return (
     <Ctx.Provider value={{ lang, setLang, t, tc }}>
