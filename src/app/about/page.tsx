@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useTranslations } from "@/lib/i18n";
 import { useMounted } from "@/lib/use-mounted";
-import CostaRicaFlag from "@/components/CostaRicaFlag";
 import type { SiteSettings } from "@/lib/types";
 import { defaultSettings } from "@/lib/types";
 
@@ -61,22 +60,32 @@ export default function AboutPage() {
               <p className="leading-relaxed text-lg" style={{ color: textSecondary }}>{settings.aboutContent}</p>
             </div>
             <div className="rounded-2xl overflow-hidden border" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
-              <Image src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Restaurante" width={800} height={400} unoptimized className="w-full h-[400px] object-cover" />
+              <Image src={settings.aboutImage && settings.aboutImage.trim() ? settings.aboutImage.trim() : "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80"} alt="Restaurante" width={800} height={400} unoptimized className="w-full h-[400px] object-cover" />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-            {[
+          {(() => {
+            const configured = [
+              { title: t("about.mission"), desc: settings.aboutMission },
+              { title: t("about.vision"), desc: settings.aboutVision },
+              { title: t("about.values"), desc: settings.aboutValues },
+            ].filter(x => x.desc && x.desc.trim());
+            const items = configured.length > 0 ? configured : [
               { title: t("about.mission"), desc: t("about.missionDesc") },
               { title: t("about.vision"), desc: t("about.visionDesc") },
               { title: t("about.values"), desc: t("about.valuesDesc") },
-            ].map((item, i) => (
-              <div key={i} className="p-8 rounded-2xl border" style={{ backgroundColor: cardBg, borderColor: "rgba(255,255,255,0.1)" }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: textPrimary }}>{item.title}</h3>
-                <p className="leading-relaxed" style={{ color: textSecondary }}>{item.desc}</p>
+            ];
+            return (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                {items.map((item, i) => (
+                  <div key={i} className="p-8 rounded-2xl border" style={{ backgroundColor: cardBg, borderColor: "rgba(255,255,255,0.1)" }}>
+                    <h3 className="text-xl font-bold mb-4" style={{ color: textPrimary }}>{item.title}</h3>
+                    <p className="leading-relaxed" style={{ color: textSecondary }}>{item.desc}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            );
+          })()}
         </div>
       </div>
       <Footer

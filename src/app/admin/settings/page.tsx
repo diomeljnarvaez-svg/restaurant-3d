@@ -243,6 +243,46 @@ export default function AdminSettings() {
               <label className="block text-sm text-gray-400 mb-1">Contenido</label>
               <textarea value={settings.aboutContent} onChange={e => update("aboutContent", e.target.value)} rows={4} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
             </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Imagen de la sección</label>
+              <div className="flex items-center gap-4">
+                {settings.aboutImage ? (
+                  <div className="relative w-32 h-20 rounded-xl border border-white/10 overflow-hidden bg-white/5 flex-shrink-0">
+                    <Image src={settings.aboutImage} alt="Nosotros" width={128} height={80} unoptimized className="w-full h-full object-cover" />
+                    <button onClick={() => update("aboutImage", "")} className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs hover:bg-red-600" title="Eliminar imagen">×</button>
+                  </div>
+                ) : (
+                  <div className="w-32 h-20 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                )}
+                <label className="px-4 py-2 rounded-xl text-sm font-medium cursor-pointer border border-white/10 text-gray-300 hover:text-white hover:bg-white/5 transition-all">
+                  {settings.aboutImage ? "Cambiar imagen" : "Subir imagen"}
+                  <input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" onChange={e => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (ev) => update("aboutImage", ev.target?.result as string);
+                    reader.readAsDataURL(file);
+                  }} className="hidden" />
+                </label>
+                <p className="text-xs text-gray-500">PNG, JPG, WebP o SVG.</p>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Misión</label>
+              <textarea value={settings.aboutMission} onChange={e => update("aboutMission", e.target.value)} rows={3} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Texto de la misión" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Visión</label>
+              <textarea value={settings.aboutVision} onChange={e => update("aboutVision", e.target.value)} rows={3} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Texto de la visión" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Valores</label>
+              <textarea value={settings.aboutValues} onChange={e => update("aboutValues", e.target.value)} rows={3} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="Texto de los valores" />
+            </div>
           </div>
         </section>
 

@@ -61,6 +61,10 @@ export interface SiteSettings {
   heroSubtitle: string;
   aboutTitle: string;
   aboutContent: string;
+  aboutImage: string;
+  aboutMission: string;
+  aboutVision: string;
+  aboutValues: string;
   address: string;
   phone: string;
   email: string;
@@ -95,6 +99,10 @@ export const defaultSettings: SiteSettings = {
   aboutTitle: "Nuestra Historia",
   aboutContent:
     "Desde 2015, nos dedicamos a crear experiencias culinarias únicas combinando tradición e innovación. Cada plato es una obra de arte preparada con los ingredientes más frescos.",
+  aboutImage: "",
+  aboutMission: "",
+  aboutVision: "",
+  aboutValues: "",
   address: "Av. Principal 123, Ciudad",
   phone: "+1 234 567 890",
   email: "info@dondepapa.com",
