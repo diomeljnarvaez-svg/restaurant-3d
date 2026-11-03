@@ -68,6 +68,9 @@ export interface SiteSettings {
   facebook: string;
   instagram: string;
   twitter: string;
+  googleMapsUrl: string;
+  wazeUrl: string;
+  mapEmbedUrl: string;
   reservationsEnabled: boolean;
   maxGuestsPerReservation: number;
   reservationNotice: string;
@@ -99,6 +102,9 @@ export const defaultSettings: SiteSettings = {
   facebook: "https://facebook.com",
   instagram: "https://instagram.com",
   twitter: "https://twitter.com",
+  googleMapsUrl: "",
+  wazeUrl: "",
+  mapEmbedUrl: "",
   reservationsEnabled: true,
   maxGuestsPerReservation: 10,
   reservationNotice: "Solicita tu reservación con al menos 2 horas de anticipación.",

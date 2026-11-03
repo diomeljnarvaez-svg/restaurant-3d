@@ -64,13 +64,13 @@ export default function ContactPage() {
                 {t("contact.whatsapp")}
               </a>
               <div className="pt-4">
-                <MapLinks address={settings.address} />
+                <MapLinks address={settings.address} googleMapsUrl={settings.googleMapsUrl} wazeUrl={settings.wazeUrl} />
               </div>
             </div>
 
             <div className="rounded-2xl overflow-hidden border h-[450px]" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095919367!2d-73.98569768459377!3d40.748569979327764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b30e4c9f%3A0x5c0f3b1b7b0b0b0!2sEmpire%20State%20Building!5e0!3m2!1ses!2s!4v1"
+                src={settings.mapEmbedUrl && settings.mapEmbedUrl.trim() ? settings.mapEmbedUrl.trim() : `https://www.google.com/maps?q=${encodeURIComponent(settings.address)}&output=embed`}
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "invert(0.9) hue-rotate(180deg)" }}

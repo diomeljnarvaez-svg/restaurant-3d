@@ -40,13 +40,12 @@ export default function Header({ siteName, primaryColor }: Props) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <Link href="/" className="flex items-center gap-2">
-            {logo ? (
-              <Image src={logo} alt={siteName} width={180} height={40} unoptimized className="h-10 w-auto max-w-[180px] object-contain" />
-            ) : (
-              <span className="text-lg sm:text-2xl font-bold tracking-tight leading-tight" style={{ color: primaryColor }}>
-                {siteName}
-              </span>
+            {logo && (
+              <Image src={logo} alt={siteName} width={180} height={40} unoptimized className="h-10 w-auto max-w-[120px] object-contain" />
             )}
+            <span className="text-lg sm:text-2xl font-bold tracking-tight leading-tight" style={{ color: primaryColor }}>
+              {siteName}
+            </span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">

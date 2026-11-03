@@ -4,21 +4,23 @@ import { useMounted } from "@/lib/use-mounted";
 
 interface Props {
   address: string;
+  googleMapsUrl?: string;
+  wazeUrl?: string;
 }
 
-export default function MapLinks({ address }: Props) {
+export default function MapLinks({ address, googleMapsUrl, wazeUrl }: Props) {
   const mounted = useMounted();
 
   const encoded = encodeURIComponent(address);
-  const googleUrl = `https://www.google.com/maps/dir/?api=1&destination=${encoded}`;
-  const wazeUrl = `https://www.waze.com/ul?q=${encoded}&navigate=yes`;
+  const google = googleMapsUrl && googleMapsUrl.trim() ? googleMapsUrl.trim() : `https://www.google.com/maps/dir/?api=1&destination=${encoded}`;
+  const waze = wazeUrl && wazeUrl.trim() ? wazeUrl.trim() : `https://www.waze.com/ul?q=${encoded}&navigate=yes`;
 
   if (!mounted) return null;
 
   return (
     <div className="flex flex-wrap gap-3">
       <a
-        href={googleUrl}
+        href={google}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all hover:scale-105 bg-white/5 text-gray-300 hover:text-white hover:bg-white/10 border border-white/10"
@@ -29,7 +31,7 @@ export default function MapLinks({ address }: Props) {
         Google Maps
       </a>
       <a
-        href={wazeUrl}
+        href={waze}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all hover:scale-105"

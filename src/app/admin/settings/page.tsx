@@ -269,6 +269,26 @@ export default function AdminSettings() {
           </div>
         </section>
 
+        {/* Maps */}
+        <section className="p-6 rounded-2xl border border-white/10 bg-white/5">
+          <h2 className="text-lg font-semibold text-white mb-4">Mapas y Navegación</h2>
+          <p className="text-sm text-gray-400 mb-4">Configura los enlaces de Google Maps y Waze para la página de contacto. Si los dejas vacíos, se generan automáticamente a partir de la dirección.</p>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">URL de Google Maps (direcciones o embed)</label>
+              <input value={settings.googleMapsUrl} onChange={e => update("googleMapsUrl", e.target.value)} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="https://www.google.com/maps/..." />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">URL de Waze</label>
+              <input value={settings.wazeUrl} onChange={e => update("wazeUrl", e.target.value)} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="https://www.waze.com/ul?..." />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">URL de embed del mapa (iframe)</label>
+              <input value={settings.mapEmbedUrl} onChange={e => update("mapEmbedUrl", e.target.value)} className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="https://www.google.com/maps/embed?pb=..." />
+            </div>
+          </div>
+        </section>
+
         {/* WhatsApp */}
         <section className="p-6 rounded-2xl border border-white/10 bg-white/5">
           <h2 className="text-lg font-semibold text-white mb-4">WhatsApp</h2>
